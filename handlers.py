@@ -108,7 +108,7 @@ def _subs_keyboard(urls: list[str]) -> InlineKeyboardMarkup:
 
 @admin_only
 async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    host = os.getenv("SERVER_HOST", "localhost")
+    pub_host = os.getenv("PUBLIC_HOST", os.getenv("SERVER_HOST", "localhost"))
     port = os.getenv("SERVER_PORT", "8080")
     await update.message.reply_text(
         "👋 Привет!\n\n"
@@ -119,7 +119,7 @@ async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "/locations — управление локациями\n"
         "/check <host> — проверить страну хоста\n"
         f"/mysub — ваша ссылка на подписку\n\n"
-        f"Текущий /sub: `http://{host}:{port}/sub`",
+        f"Текущий /sub: `http://{pub_host}:{port}/sub`",
         parse_mode="Markdown",
     )
 
@@ -212,9 +212,9 @@ async def cmd_check(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 @admin_only
 async def cmd_mysub(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    host = os.getenv("SERVER_HOST", "localhost")
+    pub_host = os.getenv("PUBLIC_HOST", os.getenv("SERVER_HOST", "localhost"))
     port = os.getenv("SERVER_PORT", "8080")
-    url = f"http://{host}:{port}/sub"
+    url = f"http://{pub_host}:{port}/sub"
     await update.message.reply_text(
         f"🔗 Ваша ссылка на подписку:\n`{url}`",
         parse_mode="Markdown",
