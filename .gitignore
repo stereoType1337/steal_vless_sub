@@ -1,0 +1,9 @@
+.env
+vless_links.json
+*.pyc
+__pycache__/
+ssl/
+.DS_Store
+.idea/
+venv/
+data.json
